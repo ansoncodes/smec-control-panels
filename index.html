@@ -283,6 +283,115 @@
       flex-shrink: 0;
     }
 
+    /* ── Hamburger button (hidden on desktop) ── */
+    .nav-hamburger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      color: var(--heading);
+      transition: background 0.2s ease, border-color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .nav-hamburger:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .nav-hamburger svg {
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-hamburger .icon-close {
+      display: none;
+    }
+
+    .nav-hamburger[aria-expanded="true"] .icon-open {
+      display: none;
+    }
+
+    .nav-hamburger[aria-expanded="true"] .icon-close {
+      display: block;
+    }
+
+    /* ── Mobile drawer ── */
+    .nav-drawer {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(5, 15, 35, 0.98);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.36s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+      opacity: 0;
+    }
+
+    .nav-drawer.is-open {
+      max-height: 520px;
+      opacity: 1;
+    }
+
+    .nav-drawer-inner {
+      padding: 8px 0 20px;
+    }
+
+    .nav-drawer-links {
+      display: flex;
+      flex-direction: column;
+      padding: 0 20px;
+    }
+
+    .nav-drawer-links a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 1rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: color 0.2s ease, padding-left 0.2s ease;
+      text-decoration: none;
+    }
+
+    .nav-drawer-links a:last-child {
+      border-bottom: none;
+    }
+
+    .nav-drawer-links a:hover {
+      color: #ffffff;
+      padding-left: 4px;
+    }
+
+    .nav-drawer-links a::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .nav-drawer-actions {
+      display: flex;
+      gap: 10px;
+      padding: 16px 20px 4px;
+    }
+
+    .nav-drawer-actions a {
+      flex: 1 1 0;
+    }
+
     .button,
     .button-outline,
     .button-soft {
@@ -1257,18 +1366,34 @@
       right: 12px;
       bottom: 12px;
       z-index: 990;
-      gap: 10px;
+      gap: 8px;
       padding: 10px;
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(8, 17, 29, 0.92);
+      background: rgba(8, 17, 29, 0.94);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .mobile-action-bar a {
       flex: 1 1 0;
       min-height: 48px;
+    }
+
+    /* WhatsApp icon-only button inside action bar on mobile */
+    .mobile-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      min-height: 48px;
+      flex-shrink: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1fa463 0%, #24d366 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(31, 164, 99, 0.30);
+      border: none;
     }
 
     .modal-backdrop {
@@ -1375,20 +1500,24 @@
 
       .nav {
         min-height: auto;
-        padding: 16px 0;
-        flex-wrap: wrap;
+        padding: 14px 0;
+        gap: 12px;
       }
 
-      .nav-links {
-        order: 3;
-        width: 100%;
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: 4px;
-      }
-
+      /* Hide desktop nav links and actions on mobile */
+      .nav-links,
       .nav-actions {
-        margin-left: auto;
+        display: none;
+      }
+
+      /* Show hamburger */
+      .nav-hamburger {
+        display: inline-flex;
+      }
+
+      /* Show mobile drawer */
+      .nav-drawer {
+        display: flex;
       }
 
       .hero {
@@ -1422,7 +1551,13 @@
 
       .floating-stack {
         right: 12px;
-        bottom: 86px;
+        /* action bar height ≈ 68px + 12px bottom offset + 12px gap */
+        bottom: 100px;
+      }
+
+      /* Hide floating WhatsApp on mobile — it lives in the action bar instead */
+      .whatsapp-button {
+        display: none;
       }
 
       .sticky-rfq {
@@ -1447,13 +1582,8 @@
         padding: 22px;
       }
 
-      .hero-actions,
-      .nav-actions {
+      .hero-actions {
         width: 100%;
-      }
-
-      .nav-actions a {
-        flex: 1 1 0;
       }
 
       .hero-meta,
@@ -1729,6 +1859,33 @@
         <div class="nav-actions">
           <a class="button-outline js-track" href="mailto:sales@smecong.com" data-event="email_click" data-event-label="nav_email">Email Sales</a>
           <a class="button js-track" href="#hero-rfq" data-event="cta_click" data-event-label="nav_request_quote">Request a Quote</a>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+          <svg class="icon-open" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <rect x="2" y="5" width="16" height="2" rx="1" fill="currentColor"/>
+            <rect x="2" y="9" width="16" height="2" rx="1" fill="currentColor"/>
+            <rect x="2" y="13" width="16" height="2" rx="1" fill="currentColor"/>
+          </svg>
+          <svg class="icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <line x1="4" y1="4" x2="16" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="16" y1="4" x2="4" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+        <div class="nav-drawer-inner container">
+          <nav class="nav-drawer-links" aria-label="Mobile navigation">
+            <a href="#who" class="js-drawer-link">Industries</a>
+            <a href="#solutions" class="js-drawer-link">Solutions</a>
+            <a href="#capabilities" class="js-drawer-link">Capabilities</a>
+            <a href="#execution" class="js-drawer-link">Execution</a>
+            <a href="#faq" class="js-drawer-link">FAQ</a>
+            <a href="#contact" class="js-drawer-link">Contact</a>
+          </nav>
+          <div class="nav-drawer-actions">
+            <a class="button-outline js-track js-drawer-link" href="mailto:sales@smecong.com" data-event="email_click" data-event-label="nav_email_mobile">Email Sales</a>
+            <a class="button js-track js-drawer-link" href="#hero-rfq" data-event="cta_click" data-event-label="nav_request_quote_mobile">Request a Quote</a>
+          </div>
         </div>
       </div>
     </header>
@@ -2568,13 +2725,18 @@
         <svg width="18" height="18" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor">
           <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.437-2.01A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.854l-.486-.289-5.008 1.194 1.218-4.88-.317-.5A13.267 13.267 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.274-9.93c-.398-.199-2.357-1.163-2.722-1.295-.365-.133-.631-.199-.897.199-.265.398-1.03 1.295-1.262 1.561-.232.265-.465.298-.863.1-.398-.2-1.681-.619-3.2-1.975-1.184-1.056-1.982-2.36-2.214-2.758-.232-.398-.025-.613.174-.811.179-.178.398-.465.597-.697.199-.232.265-.398.398-.664.132-.265.066-.497-.033-.696-.1-.199-.897-2.163-1.229-2.96-.323-.778-.651-.672-.897-.684l-.764-.013c-.265 0-.697.1-1.063.497-.365.398-1.394 1.362-1.394 3.32 0 1.957 1.427 3.848 1.626 4.114.199.265 2.808 4.287 6.804 6.013.951.411 1.692.657 2.271.84.954.304 1.823.261 2.51.158.766-.114 2.357-.963 2.689-1.893.332-.93.332-1.727.232-1.893-.099-.166-.365-.265-.763-.464z"/>
         </svg>
-        WhatsApp
+        <span>WhatsApp</span>
       </a>
     </div>
 
     <div class="mobile-action-bar" aria-label="Mobile actions">
       <a class="button js-track" href="tel:+918588870618" data-event="phone_click" data-event-label="mobile_click_to_call">Click To Call</a>
       <a class="button-outline js-track" href="#hero-rfq" data-event="sticky_rfq_click" data-event-label="mobile_rfq_button">Request RFQ</a>
+      <a class="mobile-wa-btn js-track" href="https://wa.me/918606047714?text=Hi%2C%20I%20would%20like%20to%20discuss%20a%20control%20panel%20requirement." target="_blank" rel="noopener" aria-label="WhatsApp" data-event="whatsapp_click" data-event-label="mobile_bar_whatsapp">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+          <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.437-2.01A15.93 15.93 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.771-1.854l-.486-.289-5.008 1.194 1.218-4.88-.317-.5A13.267 13.267 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.274-9.93c-.398-.199-2.357-1.163-2.722-1.295-.365-.133-.631-.199-.897.199-.265.398-1.03 1.295-1.262 1.561-.232.265-.465.298-.863.1-.398-.2-1.681-.619-3.2-1.975-1.184-1.056-1.982-2.36-2.214-2.758-.232-.398-.025-.613.174-.811.179-.178.398-.465.597-.697.199-.232.265-.398.398-.664.132-.265.066-.497-.033-.696-.1-.199-.897-2.163-1.229-2.96-.323-.778-.651-.672-.897-.684l-.764-.013c-.265 0-.697.1-1.063.497-.365.398-1.394 1.362-1.394 3.32 0 1.957 1.427 3.848 1.626 4.114.199.265 2.808 4.287 6.804 6.013.951.411 1.692.657 2.271.84.954.304 1.823.261 2.51.158.766-.114 2.357-.963 2.689-1.893.332-.93.332-1.727.232-1.893-.099-.166-.365-.265-.763-.464z"/>
+        </svg>
+      </a>
     </div>
 
     <div class="modal-backdrop" id="exitModal" aria-hidden="true">
@@ -2938,6 +3100,50 @@
         page_location: window.location.href,
         page_path: window.location.pathname
       });
+
+      // ── Hamburger menu ──
+      (function () {
+        var hamburger = document.getElementById("nav-hamburger");
+        var drawer = document.getElementById("nav-drawer");
+        if (!hamburger || !drawer) { return; }
+
+        function openDrawer() {
+          drawer.classList.add("is-open");
+          drawer.setAttribute("aria-hidden", "false");
+          hamburger.setAttribute("aria-expanded", "true");
+          hamburger.setAttribute("aria-label", "Close menu");
+        }
+
+        function closeDrawer() {
+          drawer.classList.remove("is-open");
+          drawer.setAttribute("aria-hidden", "true");
+          hamburger.setAttribute("aria-expanded", "false");
+          hamburger.setAttribute("aria-label", "Open menu");
+        }
+
+        hamburger.addEventListener("click", function () {
+          if (drawer.classList.contains("is-open")) {
+            closeDrawer();
+          } else {
+            openDrawer();
+          }
+        });
+
+        // Close when a drawer link is clicked
+        drawer.querySelectorAll(".js-drawer-link").forEach(function (link) {
+          link.addEventListener("click", function () {
+            closeDrawer();
+          });
+        });
+
+        // Close on Escape key
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && drawer.classList.contains("is-open")) {
+            closeDrawer();
+            hamburger.focus();
+          }
+        });
+      }());
     })();
   </script>
 </body>
