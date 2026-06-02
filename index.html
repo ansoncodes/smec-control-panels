@@ -2810,11 +2810,10 @@
       }
 
       function openExitModal(reason) {
-        // if (!modal || sessionStorage.getItem("smecExitModalSeen") === "true") {
-        if (!modal) {
+        if (!modal || sessionStorage.getItem("smecExitModalSeen") === "true") {
           return;
         }
-        // sessionStorage.setItem("smecExitModalSeen", "true");
+        sessionStorage.setItem("smecExitModalSeen", "true");
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
