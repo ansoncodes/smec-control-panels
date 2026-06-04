@@ -63,6 +63,10 @@
       overflow-x: hidden;
     }
 
+    body.nav-open {
+      overflow: hidden;
+    }
+
     a {
       color: inherit;
       text-decoration: none;
@@ -331,17 +335,32 @@
       display: none;
       flex-direction: column;
       gap: 0;
-      background: rgba(5, 15, 35, 0.98);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(232, 238, 247, 0.98), rgba(220, 229, 242, 0.97));
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
       overflow: hidden;
       max-height: 0;
-      transition: max-height 0.36s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+      pointer-events: none;
+      visibility: hidden;
+      box-shadow: none;
+      transition:
+        max-height 0.36s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.28s ease,
+        border-color 0.2s ease,
+        box-shadow 0.28s ease,
+        visibility 0s linear 0.36s;
       opacity: 0;
     }
 
     .nav-drawer.is-open {
-      max-height: 520px;
+      max-height: min(640px, calc(100vh - var(--nav-height)));
+      border-top-color: rgba(13, 31, 69, 0.10);
+      border-bottom-color: rgba(13, 31, 69, 0.12);
+      pointer-events: auto;
+      visibility: visible;
+      box-shadow: 0 22px 50px rgba(10, 18, 35, 0.18);
+      transition-delay: 0s;
       opacity: 1;
     }
 
@@ -360,11 +379,11 @@
       align-items: center;
       gap: 10px;
       padding: 14px 0;
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(13, 31, 69, 0.82);
       font-size: 1rem;
-      font-weight: 500;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      transition: color 0.2s ease, padding-left 0.2s ease;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(13, 31, 69, 0.08);
+      transition: color 0.2s ease, padding-left 0.2s ease, background 0.2s ease;
       text-decoration: none;
     }
 
@@ -373,8 +392,14 @@
     }
 
     .nav-drawer-links a:hover {
-      color: #ffffff;
+      color: #0d1f45;
       padding-left: 4px;
+    }
+
+    .nav-drawer-links a:focus-visible {
+      color: #0d1f45;
+      background: rgba(74, 144, 247, 0.08);
+      outline: none;
     }
 
     .nav-drawer-links a::before {
@@ -395,6 +420,18 @@
 
     .nav-drawer-actions a {
       flex: 1 1 0;
+    }
+
+    .nav-drawer-actions .button-outline {
+      border-color: rgba(10, 25, 60, 0.22);
+      color: #0a193c;
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .nav-drawer-actions .button-outline:hover,
+    .nav-drawer-actions .button-outline:focus-visible {
+      background: rgba(74, 144, 247, 0.08);
+      border-color: rgba(10, 25, 60, 0.38);
     }
 
     .button,
@@ -2997,8 +3034,8 @@
             <div class="gallery-item" data-lightbox="panels/7.png">
               <img src="panels/7.png" alt="MCC retrofit before and after comparison" loading="lazy" width="480" height="330">
             </div>
-            <div class="gallery-item" data-lightbox="panels/17.png">
-              <img src="panels/17.png" alt="Marine junction box wiring panels open" loading="lazy" width="480" height="330">
+            <div class="gallery-item" data-lightbox="panels/mcc-panel.png">
+              <img src="panels/mcc-panel.png" alt="MCC panel interior and door-mounted control components" loading="lazy" width="480" height="330">
             </div>
             <div class="gallery-item" data-lightbox="panels/13.png">
               <img src="panels/13.png" alt="Large PLC control panel dual enclosure open" loading="lazy" width="480" height="330">
@@ -3013,8 +3050,8 @@
             <div class="gallery-item" data-lightbox="panels/3.png">
               <img src="panels/3.png" alt="Flood alarm announcement system panel" loading="lazy" width="480" height="300">
             </div>
-            <div class="gallery-item" data-lightbox="panels/18.png">
-              <img src="panels/18.png" alt="Marine navigation light control panel" loading="lazy" width="480" height="300">
+            <div class="gallery-item" data-lightbox="panels/nlcp.png">
+              <img src="panels/nlcp.png" alt="Navigation light control panel with display and control stations" loading="lazy" width="480" height="300">
             </div>
             <div class="gallery-item" data-lightbox="panels/24.png">
               <img src="panels/24.png" alt="MCC panel with ACB section" loading="lazy" width="480" height="300">
@@ -3024,6 +3061,15 @@
             </div>
             <div class="gallery-item" data-lightbox="panels/23.png">
               <img src="panels/23.png" alt="Fire and gas system panel" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/retrofit-3.png">
+              <img src="panels/retrofit-3.png" alt="Boiler circulating pump retrofit before and after control panel comparison" loading="lazy" width="600" height="600">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/retrofit-4.png">
+              <img src="panels/retrofit-4.png" alt="Control cabinet retrofit before and after open enclosure comparison" loading="lazy" width="600" height="600">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/retrofit-5.png">
+              <img src="panels/retrofit-5.png" alt="MCC retrofit lineup before and after modernization comparison" loading="lazy" width="600" height="600">
             </div>
           </div>
 
@@ -3101,11 +3147,11 @@
             <div class="gallery-item" data-lightbox="panels/15.png">
               <img src="panels/15.png" alt="BOP remote panel tool pusher offshore drilling" loading="lazy" width="480" height="450">
             </div>
-            <div class="gallery-item" data-lightbox="panels/18.png">
-              <img src="panels/18.png" alt="Marine navigation light control panel" loading="lazy" width="480" height="450">
+            <div class="gallery-item" data-lightbox="panels/nlcp.png">
+              <img src="panels/nlcp.png" alt="Navigation light control panel with display and control stations" loading="lazy" width="480" height="450">
             </div>
-            <div class="gallery-item" data-lightbox="panels/17.png">
-              <img src="panels/17.png" alt="Marine junction boxes open with wiring" loading="lazy" width="480" height="450">
+            <div class="gallery-item" data-lightbox="panels/mcc-panel.png">
+              <img src="panels/mcc-panel.png" alt="MCC panel interior and door-mounted control components" loading="lazy" width="480" height="450">
             </div>
             <div class="gallery-item" data-lightbox="panels/21.png">
               <img src="panels/21.png" alt="Marine MCC green enclosure fully open showing internals" loading="lazy" width="960" height="420">
@@ -3128,6 +3174,15 @@
             </div>
             <div class="gallery-item" data-lightbox="panels/16.png">
               <img src="panels/16.png" alt="Panel retrofit before and after comparison" loading="lazy" width="600" height="540">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/retrofit-3.png">
+              <img src="panels/retrofit-3.png" alt="Boiler circulating pump retrofit before and after control panel comparison" loading="lazy" width="600" height="600">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/retrofit-4.png">
+              <img src="panels/retrofit-4.png" alt="Control cabinet retrofit before and after open enclosure comparison" loading="lazy" width="600" height="600">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/retrofit-5.png">
+              <img src="panels/retrofit-5.png" alt="MCC retrofit lineup before and after modernization comparison" loading="lazy" width="600" height="600">
             </div>
           </div>
 
@@ -3794,6 +3849,7 @@
           drawer.setAttribute("aria-hidden", "false");
           hamburger.setAttribute("aria-expanded", "true");
           hamburger.setAttribute("aria-label", "Close menu");
+          document.body.classList.add("nav-open");
         }
 
         function closeDrawer() {
@@ -3801,6 +3857,7 @@
           drawer.setAttribute("aria-hidden", "true");
           hamburger.setAttribute("aria-expanded", "false");
           hamburger.setAttribute("aria-label", "Open menu");
+          document.body.classList.remove("nav-open");
         }
 
         hamburger.addEventListener("click", function () {
@@ -3823,6 +3880,12 @@
           if (event.key === "Escape" && drawer.classList.contains("is-open")) {
             closeDrawer();
             hamburger.focus();
+          }
+        });
+
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 860 && drawer.classList.contains("is-open")) {
+            closeDrawer();
           }
         });
       }());
