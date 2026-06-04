@@ -36,7 +36,7 @@
       --radius-md: 18px;
       --radius-sm: 12px;
       --container: 1540px;
-      --nav-height: 74px;
+      --nav-height: 86px;
       --heading-font: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", "Segoe UI", sans-serif;
       --body-font: "Aptos", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -184,8 +184,8 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(5, 15, 35, 0.82);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(220, 230, 245, 0.97);
       backdrop-filter: saturate(180%) blur(14px);
       -webkit-backdrop-filter: saturate(180%) blur(14px);
     }
@@ -206,19 +206,11 @@
       text-decoration: none;
     }
 
-    .brand-name {
-      font-family: var(--heading-font);
-      font-size: 1.62rem;
-      font-weight: 800;
-      letter-spacing: -0.055em;
-      line-height: 1;
-      color: var(--heading);
-    }
-
-    .brand-name em {
-      font-style: normal;
-      color: var(--accent);
-      text-shadow: 0 0 18px rgba(74, 144, 247, 0.50);
+    .brand-logo {
+      display: block;
+      height: 56px;
+      width: auto;
+      object-fit: contain;
     }
 
     .brand-tagline-unused {
@@ -248,7 +240,7 @@
 
     .nav-links a {
       position: relative;
-      color: rgba(255, 255, 255, 0.68);
+      color: rgba(15, 30, 60, 0.70);
       transition: color 0.2s ease;
       padding-bottom: 4px;
     }
@@ -267,7 +259,7 @@
 
     .nav-links a:hover,
     .nav-links a:focus-visible {
-      color: #ffffff;
+      color: #0d1f45;
     }
 
     .nav-links a:hover::after,
@@ -283,6 +275,19 @@
       flex-shrink: 0;
     }
 
+    .nav-actions .button-outline {
+      border-color: rgba(10, 25, 60, 0.35);
+      color: #0a193c;
+      background: transparent;
+    }
+
+    .nav-actions .button-outline:hover,
+    .nav-actions .button-outline:focus-visible {
+      background: rgba(10, 25, 60, 0.08);
+      border-color: rgba(10, 25, 60, 0.55);
+      transform: translateY(-2px);
+    }
+
     /* ── Hamburger button (hidden on desktop) ── */
     .nav-hamburger {
       display: none;
@@ -291,18 +296,18 @@
       width: 44px;
       height: 44px;
       padding: 0;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(15, 30, 60, 0.18);
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(15, 30, 60, 0.06);
       cursor: pointer;
-      color: var(--heading);
+      color: #0d1f45;
       transition: background 0.2s ease, border-color 0.2s ease;
       flex-shrink: 0;
     }
 
     .nav-hamburger:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(15, 30, 60, 0.12);
+      border-color: rgba(15, 30, 60, 0.28);
     }
 
     .nav-hamburger svg {
@@ -1611,6 +1616,154 @@
         transform: none !important;
       }
     }
+
+    /* ── Gallery Section ── */
+    .gallery-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .gallery-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .gallery-tab:hover {
+      background: rgba(74, 144, 247, 0.08);
+      border-color: rgba(74, 144, 247, 0.22);
+      color: var(--heading);
+    }
+
+    .gallery-tab.is-active {
+      background: rgba(74, 144, 247, 0.12);
+      border-color: rgba(74, 144, 247, 0.35);
+      color: #c8dffe;
+    }
+
+    .gallery-category {
+      display: none;
+      gap: 14px;
+    }
+
+    .gallery-category.is-active {
+      display: grid;
+    }
+
+    .gallery-category.layout-4 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .gallery-category.layout-3 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .gallery-category.layout-2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .gallery-item {
+      height: 220px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.07);
+      background: rgba(13, 23, 40, 0.6);
+      overflow: hidden;
+      cursor: zoom-in;
+      transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .gallery-item:hover {
+      border-color: rgba(74, 144, 247, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Lightbox */
+    .gallery-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(4, 8, 15, 0.90);
+      backdrop-filter: blur(8px);
+    }
+
+    .gallery-lightbox.is-open {
+      display: flex;
+    }
+
+    .gallery-lightbox img {
+      max-width: min(900px, 94vw);
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 16px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    }
+
+    .gallery-lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+
+    .gallery-lightbox-close:hover {
+      background: rgba(255,255,255,0.18);
+    }
+
+    @media (max-width: 1100px) {
+      .gallery-category.layout-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .gallery-category.layout-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .gallery-category.layout-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 860px) {
+      .gallery-category.layout-4,
+      .gallery-category.layout-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gallery-category.layout-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      .gallery-category.layout-4,
+      .gallery-category.layout-3,
+      .gallery-category.layout-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gallery-item {
+        height: 160px;
+      }
+    }
   </style>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -1878,7 +2031,7 @@
     <header class="topbar">
       <div class="container nav">
         <a class="brand" href="#top" aria-label="SMEC Automation home">
-          <span class="brand-name">SMEC <em>Automation</em></span>
+          <img class="brand-logo" src="smec-logo.png" alt="SMEC Automation" width="160" height="40">
         </a>
         <nav class="nav-links" aria-label="Primary">
           <a href="#who">Industries</a>
@@ -2530,6 +2683,204 @@
           </ul>
         </div>
       </section>
+
+      <hr class="section-rule">
+
+      <!-- Built & Delivered Gallery -->
+      <section id="gallery" class="section defer-section">
+        <div class="container">
+          <div class="section-head reveal" style="max-width:none; text-align:center;">
+            <span class="eyebrow">Our Work</span>
+            <h2>Built &amp; Delivered</h2>
+            <p>A selection of control panels and automation systems engineered, fabricated and commissioned by SMEC.</p>
+          </div>
+
+          <!-- Category Tabs -->
+          <div class="gallery-tabs reveal" role="tablist" aria-label="Gallery categories">
+            <button class="gallery-tab is-active" data-target="gallery-all" role="tab" aria-selected="true">All Projects</button>
+            <button class="gallery-tab" data-target="gallery-plc" role="tab" aria-selected="false">PLC &amp; Automation Panels</button>
+            <button class="gallery-tab" data-target="gallery-mcc" role="tab" aria-selected="false">MCC &amp; Power Distribution</button>
+            <button class="gallery-tab" data-target="gallery-process" role="tab" aria-selected="false">Process Control</button>
+            <button class="gallery-tab" data-target="gallery-marine" role="tab" aria-selected="false">Marine &amp; Offshore</button>
+            <button class="gallery-tab" data-target="gallery-retrofit" role="tab" aria-selected="false">Retrofit Projects</button>
+          </div>
+
+          <!-- ALL -->
+          <div id="gallery-all" class="gallery-category layout-4 is-active reveal">
+            <!-- Row 1: Tall feature + 3 standard -->
+            <div class="gallery-item" data-lightbox="panels/1.png">
+              <img src="panels/1.png" alt="Large PLC control panel open showing internal wiring and PLC racks" loading="lazy" width="480" height="600">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/9.png">
+              <img src="panels/9.png" alt="RTU panel front and interior view" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/14.png">
+              <img src="panels/14.png" alt="Emergency generator control panel" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/25.png">
+              <img src="panels/25.png" alt="Generator control panel with mimic display" loading="lazy" width="480" height="300">
+            </div>
+            <!-- Row 1 col 2-4 second row -->
+            <div class="gallery-item" data-lightbox="panels/10.png">
+              <img src="panels/10.png" alt="PLC panel internal rack view" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/6.png">
+              <img src="panels/6.png" alt="Process control station panel front view" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/15.png">
+              <img src="panels/15.png" alt="BOP remote panel - Tool pusher offshore" loading="lazy" width="480" height="300">
+            </div>
+            <!-- Row 2 -->
+            <div class="gallery-item" data-lightbox="panels/8.png">
+              <img src="panels/8.png" alt="Large MCC switchboard multi-section" loading="lazy" width="960" height="360">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/5.png">
+              <img src="panels/5.png" alt="Hydrogen offer panel with control instruments" loading="lazy" width="480" height="360">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/21.png">
+              <img src="panels/21.png" alt="Marine MCC green panel open showing internals" loading="lazy" width="480" height="360">
+            </div>
+            <!-- Row 3 -->
+            <div class="gallery-item" data-lightbox="panels/7.png">
+              <img src="panels/7.png" alt="MCC retrofit before and after comparison" loading="lazy" width="480" height="330">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/17.png">
+              <img src="panels/17.png" alt="Marine junction box wiring panels open" loading="lazy" width="480" height="330">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/13.png">
+              <img src="panels/13.png" alt="Large PLC control panel dual enclosure open" loading="lazy" width="480" height="330">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/20.png">
+              <img src="panels/20.png" alt="Main switchboard panel with bus section" loading="lazy" width="480" height="330">
+            </div>
+            <!-- Row 4 -->
+            <div class="gallery-item" data-lightbox="panels/28.png">
+              <img src="panels/28.png" alt="Marine PMS panel internal view green enclosure" loading="lazy" width="480" height="600">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/3.png">
+              <img src="panels/3.png" alt="Flood alarm announcement system panel" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/18.png">
+              <img src="panels/18.png" alt="Marine navigation light control panel" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/24.png">
+              <img src="panels/24.png" alt="MCC panel with ACB section" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/19.png">
+              <img src="panels/19.png" alt="DO purifier control panel" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/23.png">
+              <img src="panels/23.png" alt="Fire and gas system panel" loading="lazy" width="480" height="300">
+            </div>
+          </div>
+
+          <!-- PLC & AUTOMATION -->
+          <div id="gallery-plc" class="gallery-category layout-3">
+            <div class="gallery-item" data-lightbox="panels/1.png">
+              <img src="panels/1.png" alt="Large PLC automation panel with orange power supplies and DIN rail" loading="lazy" width="480" height="600">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/2.png">
+              <img src="panels/2.png" alt="Tall PLC enclosure open showing DIN rails" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/9.png">
+              <img src="panels/9.png" alt="RTU panel dual enclosure front and interior" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/10.png">
+              <img src="panels/10.png" alt="PLC panel internal DIN rail components" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/13.png">
+              <img src="panels/13.png" alt="Large dual-section PLC panel fully open" loading="lazy" width="480" height="600">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/4.png">
+              <img src="panels/4.png" alt="Control panel interior with PCBs and terminal blocks" loading="lazy" width="480" height="300">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/27.png">
+              <img src="panels/27.png" alt="Generator control panel multi-section open" loading="lazy" width="480" height="300">
+            </div>
+          </div>
+
+          <!-- MCC & POWER -->
+          <div id="gallery-mcc" class="gallery-category layout-3">
+            <div class="gallery-item" data-lightbox="panels/8.png">
+              <img src="panels/8.png" alt="Large VFD MCC multi-section switchboard open" loading="lazy" width="960" height="450">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/14.png">
+              <img src="panels/14.png" alt="Emergency generator control panel front" loading="lazy" width="480" height="450">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/20.png">
+              <img src="panels/20.png" alt="Main switchboard panel with multiple sections" loading="lazy" width="480" height="420">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/24.png">
+              <img src="panels/24.png" alt="MCC panel with ACB power section" loading="lazy" width="480" height="420">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/25.png">
+              <img src="panels/25.png" alt="Generator synchronization panel with HMI screen" loading="lazy" width="480" height="420">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/26.png">
+              <img src="panels/26.png" alt="Small MCB distribution board open" loading="lazy" width="480" height="420">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/22.png">
+              <img src="panels/22.png" alt="Flood lighting distribution panel" loading="lazy" width="480" height="420">
+            </div>
+          </div>
+
+          <!-- PROCESS CONTROL -->
+          <div id="gallery-process" class="gallery-category layout-3">
+            <div class="gallery-item" data-lightbox="panels/5.png">
+              <img src="panels/5.png" alt="Hydrogen offer panel with indicator lights" loading="lazy" width="480" height="450">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/6.png">
+              <img src="panels/6.png" alt="Furnace burner automation panel front view" loading="lazy" width="480" height="450">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/12.png">
+              <img src="panels/12.png" alt="Furnace automation control panel front view" loading="lazy" width="480" height="450">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/11.png">
+              <img src="panels/11.png" alt="Stainless steel skid-mounted analyser panel" loading="lazy" width="480" height="420">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/23.png">
+              <img src="panels/23.png" alt="Fire and gas detection system" loading="lazy" width="480" height="420">
+            </div>
+          </div>
+
+          <!-- MARINE & OFFSHORE -->
+          <div id="gallery-marine" class="gallery-category layout-3">
+            <div class="gallery-item" data-lightbox="panels/15.png">
+              <img src="panels/15.png" alt="BOP remote panel tool pusher offshore drilling" loading="lazy" width="480" height="450">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/18.png">
+              <img src="panels/18.png" alt="Marine navigation light control panel" loading="lazy" width="480" height="450">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/17.png">
+              <img src="panels/17.png" alt="Marine junction boxes open with wiring" loading="lazy" width="480" height="450">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/21.png">
+              <img src="panels/21.png" alt="Marine MCC green enclosure fully open showing internals" loading="lazy" width="960" height="420">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/28.png">
+              <img src="panels/28.png" alt="Marine PMS panel interior green enclosure" loading="lazy" width="480" height="420">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/3.png">
+              <img src="panels/3.png" alt="Flood alarm announcement system panel" loading="lazy" width="480" height="420">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/19.png">
+              <img src="panels/19.png" alt="DO purifier control panel" loading="lazy" width="480" height="420">
+            </div>
+          </div>
+
+          <!-- RETROFIT -->
+          <div id="gallery-retrofit" class="gallery-category layout-2">
+            <div class="gallery-item" data-lightbox="panels/7.png">
+              <img src="panels/7.png" alt="MCC retrofit before and after — rusted to modernized" loading="lazy" width="600" height="540">
+            </div>
+            <div class="gallery-item" data-lightbox="panels/16.png">
+              <img src="panels/16.png" alt="Panel retrofit before and after comparison" loading="lazy" width="600" height="540">
+            </div>
+          </div>
+
+        </div>
+      </section>
+      <!-- End Gallery -->
 
       <hr class="section-rule">
 
@@ -3247,6 +3598,69 @@
           }
         });
       }());
+
+      // ── Gallery tabs + lightbox ──
+      (function () {
+        var tabs = document.querySelectorAll(".gallery-tab");
+        var categories = document.querySelectorAll(".gallery-category");
+        var lightbox = document.getElementById("galleryLightbox");
+        var lightboxImg = document.getElementById("galleryLightboxImg");
+        var lightboxClose = document.getElementById("galleryLightboxClose");
+
+        tabs.forEach(function (tab) {
+          tab.addEventListener("click", function () {
+            var target = tab.dataset.target;
+            tabs.forEach(function (t) {
+              t.classList.remove("is-active");
+              t.setAttribute("aria-selected", "false");
+            });
+            tab.classList.add("is-active");
+            tab.setAttribute("aria-selected", "true");
+            categories.forEach(function (cat) {
+              if (cat.id === target) {
+                cat.classList.add("is-active");
+              } else {
+                cat.classList.remove("is-active");
+              }
+            });
+          });
+        });
+
+        if (lightbox && lightboxImg) {
+          document.querySelectorAll(".gallery-item[data-lightbox]").forEach(function (item) {
+            item.addEventListener("click", function () {
+              var src = item.dataset.lightbox;
+              var alt = item.querySelector("img") ? item.querySelector("img").alt : "Panel image";
+              lightboxImg.src = src;
+              lightboxImg.alt = alt;
+              lightbox.classList.add("is-open");
+              document.body.style.overflow = "hidden";
+            });
+          });
+
+          function closeLightbox() {
+            lightbox.classList.remove("is-open");
+            document.body.style.overflow = "";
+          }
+
+          if (lightboxClose) {
+            lightboxClose.addEventListener("click", closeLightbox);
+          }
+
+          lightbox.addEventListener("click", function (e) {
+            if (e.target === lightbox) {
+              closeLightbox();
+            }
+          });
+
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
+              closeLightbox();
+            }
+          });
+        }
+      }());
+
     })();
   </script>
 </body>
