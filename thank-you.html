@@ -45,6 +45,11 @@
       flex-direction: column;
     }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
     /* ─── BACKGROUND GLOWS ─── */
     body::before,
     body::after {
@@ -74,63 +79,68 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(5, 15, 35, 0.82);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(220, 230, 245, 0.97);
       backdrop-filter: saturate(180%) blur(14px);
       -webkit-backdrop-filter: saturate(180%) blur(14px);
     }
 
-    .nav {
-      max-width: 1540px;
+    .container {
+      width: min(1540px, calc(100% - 48px));
       margin: 0 auto;
-      width: calc(100% - 48px);
+    }
+
+    .nav {
       min-height: var(--nav-height);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 40px;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
+      gap: 16px;
+      min-width: 0;
       text-decoration: none;
+    }
+
+    .brand-logo {
+      display: block;
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       flex-shrink: 0;
     }
 
-    .brand-name {
-      font-family: var(--heading-font);
-      font-size: 1.62rem;
-      font-weight: 800;
-      letter-spacing: -0.055em;
-      line-height: 1;
-      color: var(--heading);
-    }
-
-    .brand-name em {
-      font-style: normal;
-      color: var(--accent);
-      text-shadow: 0 0 18px rgba(74, 144, 247, 0.50);
-    }
-
-    .nav-action {
+    .topbar .button-outline {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       min-height: 44px;
       padding: 0 20px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: var(--heading);
-      text-decoration: none;
+      border: 1px solid rgba(10, 25, 60, 0.35);
+      color: #0a193c;
+      background: transparent;
       font-weight: 700;
       font-size: 0.88rem;
-      transition: background 0.2s ease, transform 0.2s ease;
       white-space: nowrap;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
-    .nav-action:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-1px);
+
+    .topbar .button-outline:hover {
+      background: rgba(10, 25, 60, 0.08);
+      border-color: rgba(10, 25, 60, 0.55);
+      transform: translateY(-2px);
     }
 
     /* ─── MAIN ─── */
@@ -351,6 +361,21 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 640px) {
+      .container {
+        width: min(1540px, calc(100% - 32px));
+      }
+
+      .nav {
+        min-height: auto;
+        padding: 14px 0;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .nav-actions {
+        width: 100%;
+      }
+
       .panel {
         padding: 32px 22px;
       }
@@ -359,7 +384,8 @@
         grid-template-columns: 1fr;
       }
 
-      .actions {
+      .actions,
+      .nav-actions {
         flex-direction: column;
       }
 
@@ -413,11 +439,13 @@
 <body>
 
   <header class="topbar">
-    <div class="nav">
+    <div class="container nav">
       <a class="brand" href="index.html" aria-label="SMEC Automation home">
-        <span class="brand-name">SMEC <em>Automation</em></span>
+        <img class="brand-logo" src="smec-logo.png" alt="SMEC Automation" width="160" height="40">
       </a>
-      <a class="nav-action" href="index.html">← Back to Main Page</a>
+      <div class="nav-actions">
+        <a class="button-outline" href="index.html">Back to Main Page</a>
+      </div>
     </div>
   </header>
 
